@@ -1,0 +1,29 @@
+<ion-header>
+
+  <ion-navbar>
+    <!-- <ion-title>SendUserPage</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-card>
+    <ion-card-content>
+      <ion-card-title>Send notification to {{name}}</ion-card-title>
+    </ion-card-content>
+    <form [formGroup]="sendUser" (submit)="sendPerNotif()">
+      <ion-item>
+        <ion-label floating>Topic</ion-label>
+        <ion-input formControlName="topic"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Message</ion-label>
+        <ion-textarea formControlName="message"  (input)="adjustTextArea($event);"></ion-textarea>
+      </ion-item>
+      <ion-buttons end>
+        <button ion-button type="submit">Send</button>
+      </ion-buttons>
+    </form>
+  </ion-card>
+</ion-content>

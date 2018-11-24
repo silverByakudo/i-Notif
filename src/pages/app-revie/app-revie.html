@@ -1,0 +1,27 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>Review</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-card>
+    <form [formGroup]="form" (submit)="save()">
+      <ion-item>
+        <ion-label floating>Subject</ion-label>
+        <ion-input formControlName="title" type="text"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Content</ion-label>
+        <ion-textarea formControlName="content" (input)="adjustTextArea($event);"></ion-textarea>
+      </ion-item>
+      <ion-buttons>
+        <button ion-button type="submit" [disabled]="!form.valid">Send</button>
+      </ion-buttons>
+    </form>
+
+  </ion-card>
+</ion-content>

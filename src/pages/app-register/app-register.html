@@ -1,0 +1,117 @@
+<ion-header>
+
+  <ion-navbar>
+    <!-- <ion-title>AppRegisterPage</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-list>
+
+    <form [formGroup]="registerForm" (submit)=registerUser() no-validate>
+      <ion-card *ngIf="step == 1" padding-left padding-bottom>
+        <ion-card-content>
+          <ion-card-title>Email</ion-card-title>
+        </ion-card-content>
+        <ion-item>
+          <ion-label floating>Email</ion-label>
+          <ion-input formControlName="email" type="email" [value]="mail" [class.invalid]="!registerForm.controls.email.valid && registerForm.get('email').dirty"></ion-input>
+        </ion-item>
+        <br />
+        <ion-buttons end>
+          <button ion-button [disabled]="!registerForm.controls.email.valid" (tap)="next()">Next</button>
+        </ion-buttons>
+      </ion-card>
+
+      <ion-card *ngIf="step == 2" padding-left padding-bottom>
+        <ion-card-content>
+          <ion-card-title>Personal Information</ion-card-title>
+        </ion-card-content>
+
+        <ion-item>
+          <ion-label floating>First Name</ion-label>
+          <ion-input formControlName="fName" type="text" [class.invalid]="!registerForm.controls.fName.valid && registerForm.get('fName').dirty"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Last Name</ion-label>
+          <ion-input formControlName="lName" type="text" [class.invalid]="!registerForm.controls.lName.valid && registerForm.get('lName').dirty"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Number</ion-label>
+          <ion-input formControlName="number" type="number" [class.invalid]="!registerForm.controls.number.valid && registerForm.get('number').dirty"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label floating>Address</ion-label>
+          <ion-input formControlName="address" type="text" [class.invalid]="!registerForm.controls.address.valid && registerForm.get('address').dirty"></ion-input>
+        </ion-item>
+
+        <!-- <ion-item>
+          <ion-label floating>Address</ion-label>
+          <ion-input formControlName="address" type="text" [class.invalid]="!registerForm.controls.address.valid && registerForm.get('address').dirty"></ion-input>
+        </ion-item> -->
+        <br />
+
+        <ion-buttons end>
+          <button ion-button [disabled]="!registerForm.controls.fName.valid && !registerForm.controls.lName.valid && !registerForm.controls.number.valid && !registerForm.controls.address.valid"
+            (tap)="next()">Next</button>
+        </ion-buttons>
+
+      </ion-card>
+
+      <ion-card *ngIf="step == 3" padding-left padding-bottom>
+        <ion-card-content>
+          <ion-card-title>Photo</ion-card-title>
+        </ion-card-content>
+        <ion-item>
+          <ion-thumbnail item-start *ngIf="photo">
+            <img [src]="photo" />
+          </ion-thumbnail>
+
+          <ion-buttons end>
+            <button ion-button icon-only (tap)="getPic(true)">
+              <ion-icon name="camera"></ion-icon>
+            </button>
+            <button ion-button icon-only (tap)="getPic(false)">
+              <ion-icon name="image"></ion-icon>
+            </button>
+          </ion-buttons>
+
+        </ion-item>
+        <br />
+        <ion-buttons end>
+          <button ion-button [disabled]="!photo"
+            (tap)="next()">Next</button>
+        </ion-buttons>
+      </ion-card>
+
+      <ion-card *ngIf="step == 4" padding-left padding-bottom>
+        <ion-card-content>
+          <ion-card-title>
+            Password
+          </ion-card-title>
+        </ion-card-content>
+        <ion-item>
+            <ion-label floating>Password</ion-label>
+            <ion-input formControlName="password" type="password" [class.invalid]="!registerForm.controls.password.valid && registerForm.get('password').dirty"></ion-input>
+          </ion-item>
+  
+          <ion-item>
+            <ion-label floating>Confirm Password</ion-label>
+            <ion-input formControlName="confirmPassword" type="password" [class.invalid]="!registerForm.controls.confirmPassword.valid && registerForm.get('confirmPassword').dirty"></ion-input>
+            <span color="danger" *ngIf="registerForm.get('password').value != registerForm.get('confirmPassword').value">Password do not match!</span>
+          </ion-item>
+
+          <br />
+          <ion-buttons end>
+            <button ion-button type=submit [disabled]="!registerForm.valid">Done</button>
+          </ion-buttons>
+      </ion-card>
+
+    </form>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,162 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-buttons left>
+      <button ion-button icon-only (tap)="dashboard()" *ngIf="currentUser?.type == 'admin'">
+        <ion-icon name="analytics"></ion-icon>
+      </button>
+    </ion-buttons>
+    <ion-title text-center>Profile</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (tap)="signOut()">
+        <ion-icon name="log-out"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content [attr.padding]="hideyo">
+    <ion-toolbar *ngIf="show">
+        <ion-segment [(ngModel)]="dash">
+          <ion-segment-button value="send">
+            <ion-icon name="notifications"></ion-icon>
+          </ion-segment-button>
+    
+          <ion-segment-button value="msgs">
+            <ion-icon name="chatboxes"></ion-icon>
+          </ion-segment-button>
+    
+          <!-- <ion-segment-button value="msgs">
+            <ion-icon name="chatboxes"></ion-icon>
+          </ion-segment-button> -->
+    
+        </ion-segment>
+      </ion-toolbar>
+
+  <!--<ion-card>
+    <form [formGroup]="profileForm" no-validate>
+      <ion-item>
+        <ion-label floating>First Name</ion-label>
+        <ion-input formControlName="fName" type="text" [class.invalid]="!profileForm.controls.fName.valid && profileForm.get('fName').dirty"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Last Name</ion-label>
+        <ion-input formControlName="lName" type="text" [class.invalid]="!profileForm.controls.lName.valid && profileForm.get('lName').dirty"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Number</ion-label>
+        <ion-input formControlName="number" type="number" [class.invalid]="!profileForm.controls.number.valid && profileForm.get('number').dirty"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Address</ion-label>
+        <ion-input formControlName="address" type="text" [class.invalid]="!profileForm.controls.address.valid && profileForm.get('address').dirty"></ion-input>
+      </ion-item>
+
+      <ion-item>
+        <ion-label floating>Address</ion-label>
+        <ion-input formControlName="address" type="text" [class.invalid]="!profileForm.controls.address.valid && profileForm.get('address').dirty"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-thumbnail item-start *ngIf="photo">
+          <img [src]="photo" />
+        </ion-thumbnail>
+
+        <ion-buttons item-end>
+          <button ion-button icon-only (tap)="getPic(true)">
+            <ion-icon name="camera"></ion-icon>
+          </button>
+          <button ion-button icon-only (tap)="getPic(false)">
+            <ion-icon name="image"></ion-icon>
+          </button>
+        </ion-buttons>
+
+      </ion-item>
+      <ion-item>
+        <ion-buttons item-end>
+          <button ion-button [disabled]="!photo" type="submit">Save Profile</button>
+        </ion-buttons>
+      </ion-item>
+    </form>
+  </ion-card>
+-->
+  <!-- <ion-card *ngIf="hideyo && profile"> -->
+
+  <!-- profile -->
+  <ion-card *ngIf="hideyo">
+        <ion-card-content>
+      <ion-card-title text-capitalize>{{currentUser?.type}}</ion-card-title>
+    </ion-card-content>
+    <ion-item>
+      <ion-avatar item-start>
+        <img [src]="currentUser?.photo.url" />
+      </ion-avatar>
+    <!-- </ion-item>
+    <ion-item>
+      <ion-icon item-start large name="person"></ion-icon> -->
+      <!-- <h2></h2> -->
+      <h2>{{currentUser?.fname}} {{currentUser?.lname}}</h2>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="at" item-start large></ion-icon>
+      <h2>{{currentUser?.email}}</h2>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="call" item-start large></ion-icon>
+      <h2>{{currentUser?.number}}</h2>
+    </ion-item>
+    <ion-item>
+      <ion-icon name="home" item-start large></ion-icon>
+      <h2>{{currentUser?.address}}</h2>
+    </ion-item>
+    <!-- <ion-item>
+      <ion-icon item-start large name="home"></ion-icon>
+      <h2>{{currentUser.address}}</h2>
+    </ion-item> -->
+  </ion-card>
+
+  <div *ngIf="show">
+    <div [ngSwitch]="dash">
+      <ion-list *ngSwitchCase="'send'">
+        <ion-item-sliding *ngFor="let u of userList">
+          <ion-item>
+            <ion-avatar item-start>
+              <img [src]="u.photo.url" />
+            </ion-avatar>
+            <h2>{{u.fname}} {{u.lname}}</h2>
+            <p>{{u.number}}</p>
+          </ion-item>
+
+          <ion-item-options side="left">
+            <button ion-button color="primary" (tap)="modal(u.id, u.fname, u.lname)">
+              <ion-icon name="notifications"></ion-icon>
+              NOTIFY
+            </button>
+            <button ion-button color="gray" (tap)="call(u.number)">
+              <ion-icon name="call"></ion-icon>
+              CALL
+            </button>
+          </ion-item-options>
+
+          <ion-item-options side="right">
+            <button ion-button color="danger" (tap)="delete(u.photo.path, u.id)">
+              <ion-icon name="trash" ></ion-icon>
+              DELETE
+            </button>
+          </ion-item-options>
+        </ion-item-sliding>
+
+      </ion-list>
+
+      <ion-list *ngSwitchCase="'msgs'">
+      </ion-list>
+
+    </div>
+    <!-- <div [ngSwitch]="'dash'">
+      <ion-list *ngSwitchCase="'send'">
+      </ion-list>
+    </div> -->
+  </div>
+</ion-content>

@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title text-center>Notifications</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content padding>
+  <ion-list>
+    <ion-item text-wrap *ngFor="let n of notifications">
+      <h2 item-start>{{n.topic}}</h2>
+      <p item-end>{{n.date}}</p>
+      <p>{{n.message}}</p>
+    </ion-item>
+    <!-- <ion-card *ngFor="let n of notifications">
+      <ion-card-content>
+        <ion-card-title>{{n.topic}}</ion-card-title>
+        <ion-card-header>{{n.date}}</ion-card-header>
+        <p>{{n.message}}</p>
+      </ion-card-content>
+    </ion-card> -->
+  </ion-list>
+</ion-content>

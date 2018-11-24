@@ -1,0 +1,49 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>i-Notify</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row justify-content-center align-items-center style="height:100%">
+      <ion-card>
+
+        <ion-card-content>
+          <ion-card-title text-center>
+            Sign In
+          </ion-card-title>
+          <form [formGroup]="loginForm" (submit)="loginUser()" no-validate>
+            <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input formControlName="email" type="email" [class.invalid]="!loginForm.controls.email.valid && loginForm.get('email').dirty"></ion-input>
+              <span color="danger" *ngIf="!loginForm.controls.email.valid">Invalid email!</span>
+            </ion-item>
+
+            <ion-item>
+              <ion-label floating>Password</ion-label>
+              <ion-input formControlName="password" type="password" [class.invalid]="!loginForm.controls.password.valid && loginForm.get('password').dirty"></ion-input>
+            </ion-item>
+            <br />
+            <ion-buttons end>
+              <button ion-button type="submit" [disabled]="!loginForm.valid">Sign In</button>
+            </ion-buttons>
+          </form>
+        </ion-card-content>
+
+      </ion-card>
+
+      <div text-center>
+        <p>Don't have an account? Register <a tappable (tap)="register()">here</a>!</p>
+        <br />
+        <a tappable (tap)="goToReset()">
+          Forgot password?
+        </a>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

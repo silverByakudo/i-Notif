@@ -1,0 +1,41 @@
+<ion-header>
+
+  <ion-navbar>
+    <ion-title text-center>About</ion-title>
+    <ion-buttons end *ngIf="user?.type == 'admin'">
+      <button ion-button clear *ngIf="!edit" (tap)="editable(true)">
+        Edit
+      </button>
+      <button ion-button clear *ngIf="edit" (tap)="editable(false)">
+        Cancel
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+<ion-card>
+  <ion-card-content *ngIf="!edit">
+    <ion-card-title>{{content?.title}}</ion-card-title>
+    <p>{{content?.content}}</p>
+  </ion-card-content>
+
+  <form *ngIf="edit" [formGroup]="form" (submit)="save()">
+    <ion-item>
+      <ion-label floating>Header</ion-label>
+      <ion-input formControlName="title" type="text"></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Content</ion-label>
+      <ion-textarea formControlName="content" (input)="adjustTextArea($event);"></ion-textarea>
+    </ion-item>
+    <ion-buttons end>
+      <button ion-button type="submit" [disabled]="!form.valid">Save</button>
+    </ion-buttons>
+  </form>
+
+</ion-card>
+</ion-content>

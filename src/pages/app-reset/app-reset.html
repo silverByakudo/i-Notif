@@ -1,0 +1,43 @@
+<ion-header>
+
+  <ion-navbar>
+    <!-- <ion-title>AppResetPage</ion-title> -->
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <ion-grid>
+    <ion-row justify-content-center align-items-center style="height:100%">
+      <ion-card>
+
+        <ion-card-content>
+          <ion-card-title text-center>
+            Reset Password
+          </ion-card-title>
+          <form [formGroup]="resetForm" (submit)="sendReset()" no-validate>
+
+            <ion-item>
+              <ion-label floating>Email</ion-label>
+              <ion-input formControlName="email" [value]=mail type="email" [class.invalid]="!resetForm.controls.email.valid && resetForm.get('email').dirty"></ion-input>
+              <span color="danger" *ngIf="!resetForm.controls.email.valid">Invalid email!</span>
+            </ion-item>
+            <br />
+            <ion-buttons end>
+              <button ion-button type="submit" [disabled]="!resetForm.valid">Send</button>
+            </ion-buttons>
+
+          </form>
+        </ion-card-content>
+
+      </ion-card>
+
+      <div text-center>
+        <a tappable (tap)="back()">
+          Back
+        </a>
+      </div>
+    </ion-row>
+  </ion-grid>
+</ion-content>

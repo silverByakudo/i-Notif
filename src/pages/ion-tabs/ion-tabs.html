@@ -1,0 +1,4 @@
+<!-- <ion-tabs [selectedIndex]="0" tabsPlacement="top" tabsHighlight="true"> -->
+<ion-tabs [selectedIndex]="0">
+  <ion-tab *ngFor="let p of tabs" [root]="p.page" [tabIcon]="p.icon"></ion-tab>
+</ion-tabs> 
